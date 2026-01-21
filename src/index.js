@@ -4,6 +4,8 @@ import cors from 'cors';
 import compression from 'compression';
 import morgan from 'morgan';
 import dotenv from 'dotenv';
+import path from 'path';
+import { fileURLToPath } from 'url';
 import { validateSignature } from './middleware/signatureMiddleware.js';
 import { authenticateToken } from './middleware/authMiddleware.js';
 import authRoutes from './routes/authRoutes.js';
@@ -13,12 +15,18 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 // Middleware Dasar
 app.use(helmet());
 app.use(cors());
 app.use(compression());
 app.use(morgan('dev'));
 app.use(express.json());
+
+// Static Files
+app.use(express.static(path.join(__dirname, '../public')));
 
 // Health Check
 app.get('/health', (req, res) => {

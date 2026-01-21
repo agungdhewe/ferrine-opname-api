@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Opname API | Premium Portal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Outfit:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6366f1;
+            --primary-glow: rgba(99, 102, 241, 0.5);
+            --bg-dark: #0f172a;
+            --bg-card: rgba(30, 41, 59, 0.7);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        /* Background blur elements */
+        .blur-bg {
+            position: fixed;
+            width: 300px;
+            height: 300px;
+            background: var(--primary);
+            filter: blur(150px);
+            z-index: -1;
+            border-radius: 50%;
+            opacity: 0.3;
+        }
+
+        .blur-1 { top: -100px; left: -100px; }
+        .blur-2 { bottom: -100px; right: -100px; }
+
+        .container {
+            max-width: 900px;
+            width: 100%;
+            animation: fadeIn 1s ease-out;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 3rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #fff 0%, var(--primary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+        }
+
+        .glass-card {
+            background: var(--bg-card);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        }
+
+        .endpoint-list {
+            display: grid;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .endpoint-item {
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            background: rgba(15, 23, 42, 0.5);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .endpoint-item:hover {
+            transform: translateY(-3px);
+            border-color: var(--primary);
+            box-shadow: 0 0 15px var(--primary-glow);
+        }
+
+        .method {
+            font-weight: 700;
+            font-size: 0.8rem;
+            padding: 0.25rem 0.6rem;
+            border-radius: 6px;
+            margin-right: 1rem;
+            min-width: 65px;
+            text-align: center;
+        }
+
+        .method.get { background: #10b981; color: #fff; }
+        .method.post { background: #3b82f6; color: #fff; }
+        .method.put { background: #f59e0b; color: #fff; }
+
+        .path {
+            font-family: monospace;
+            font-size: 1rem;
+            flex-grow: 1;
+        }
+
+        .desc {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .footer {
+            margin-top: 3rem;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            text-align: center;
+        }
+
+        .live-badge {
+            display: inline-flex;
+            align-items: center;
+            background: rgba(16, 185, 129, 0.1);
+            color: #10b981;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .live-dot {
+            width: 8px;
+            height: 8px;
+            background-color: #10b981;
+            border-radius: 50%;
+            margin-right: 8px;
+            box-shadow: 0 0 10px #10b981;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.5); opacity: 0.5; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 600px) {
+            h1 { font-size: 2rem; }
+            .glass-card { padding: 1.5rem; }
+            .endpoint-item { flex-direction: column; align-items: flex-start; }
+            .method { margin-bottom: 0.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="blur-bg blur-1"></div>
+    <div class="blur-bg blur-2"></div>
+
+    <div class="container">
+        <header>
+            <div class="live-badge">
+                <span class="live-dot"></span>
+                API SYSTEMS ONLINE
+            </div>
+            <h1>Stock Opname API</h1>
+            <p class="subtitle">v1.0.0 Infrastructure Gateway</p>
+        </header>
+
+        <main class="glass-card">
+            <p>Welcome to the official API entry point for the Stock Opname system. Use the endpoints below to interact with the service.</p>
+            
+            <div class="endpoint-list">
+                <a href="/health" class="endpoint-item">
+                    <span class="method get">GET</span>
+                    <span class="path">/health</span>
+                    <span class="desc">System Status Check</span>
+                </a>
+                <div class="endpoint-item">
+                    <span class="method post">POST</span>
+                    <span class="path">/api/v1/auth/login</span>
+                    <span class="desc">Device Authentication</span>
+                </div>
+                <div class="endpoint-item">
+                    <span class="method get">GET</span>
+                    <span class="path">/api/v1/project/:id</span>
+                    <span class="desc">Project Data Retrieval</span>
+                </div>
+                <div class="endpoint-item">
+                    <span class="method post">POST</span>
+                    <span class="path">/api/v1/project/:id/result/stream</span>
+                    <span class="desc">Batch Scan Result Upload</span>
+                </div>
+            </div>
+        </main>
+
+        <footer class="footer">
+            &copy; 2026 Core Infrastructure Team. Built with Performance in mind.
+        </footer>
+    </div>
+</body>
+</html>
