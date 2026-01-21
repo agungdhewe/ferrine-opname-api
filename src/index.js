@@ -6,6 +6,7 @@ import morgan from 'morgan';
 import dotenv from 'dotenv';
 import { validateSignature } from './middleware/signatureMiddleware.js';
 import { authenticateToken } from './middleware/authMiddleware.js';
+import authRoutes from './routes/authRoutes.js';
 
 dotenv.config();
 
@@ -23,6 +24,9 @@ app.use(express.json());
 app.get('/health', (req, res) => {
     res.json({ status: 'ok', timestamp: new Date() });
 });
+
+// Routes
+app.use('/api/v1/auth', authRoutes);
 
 // Demo Protected Route (Signature only)
 app.post('/api/v1/test/signature', validateSignature, (req, res) => {

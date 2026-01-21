@@ -27,3 +27,7 @@ cek kembali struktur project, file @.env dan @.env.example jika perlu ada modifi
 
 #4 
 siapkan Middleware Keamanan (Signature, Nonce, & JWT) yang terintegrasi dengan Redis.
+
+#5
+buatkan api services untuk authentication
+

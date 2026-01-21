@@ -13,3 +13,8 @@ di dalam file `README.md` di root direktori project.
 - Dilarang memodifikasi file-file yang ada di dalam direktori `gemini`.
 - Dilarang memodifikasi file `GEMINI.md`.
 - Dilarang keras memodifikasi DbContract, karena DbContract sudah dibuat berdasarkan aplikasi web opname yang sudah berjalan
+- Setiap service harus dibuatkan contoh penggunaannya dengan javascript ES6 di dalam direktori `examples`.
+- **Kredensial Contoh Penggunaan:** Jika contoh penggunaan (example) memerlukan proses login, wajib menggunakan environment variable `TEST_USER` dan `TEST_USERPASSWORD`.
+- Kredensial tersebut harus didefinisikan di dalam file `.env.example` di direktori `examples` dengan nilai default:
+    - `TEST_USER='admin'`
+    - `TEST_USERPASSWORD='rahasia123'`
