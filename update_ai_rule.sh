@@ -2,7 +2,7 @@
 
 # Target file
 TARGET_FILE="GEMINI.md"
-GEMINI_DIR="gemini"
+GEMINI_DIR="gemini/rules"
 
 # 1. Menuliskan beberapa baris text langsung
 echo "# 🤖 GEMINI Context Guide: StockOpname Server" > "$TARGET_FILE"
