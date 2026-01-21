@@ -1,0 +1,29 @@
+#1
+
+Baca dan pahami file GEMINI.md di root direktori ini sebagai sumber kebenaran tunggal (Single Source of Truth) untuk proyek saya.
+
+Aturan:
+- Jangan membuat file, direktori, atau kode apa pun sekarang.
+- Berikan ringkasan singkat (bullet points) tentang arsitektur, aturan DbContract, dan skema database yang kamu pahami dari dokumen tersebut.
+- Tunggu konfirmasi saya sebelum melakukan tindakan pengembangan fitur.
+- Jawab 'SIAP' jika kamu sudah paham.
+
+
+
+
+#2 
+buat struktur dan siapkan project
+
+
+#3
+ada perubahan pada aturan di GEMINI.md, penambahan tentang standar testing dan secret di device yang harus diambil dari database.
+pelajari kembali GEMINI.md dan berikan ringkasan singkat (bullet points) tentang arsitektur, aturan DbContract, dan skema database yang kamu pahami dari dokumen tersebut.
+tunggu konfirmasi saya sebelum melakukan tindakan pengembangan fitur.
+jawab 'SIAP' jika kamu sudah paham.
+
+#2 
+cek kembali struktur project, file @.env dan @.env.example jika perlu ada modifikasi
+
+
+#4 
+siapkan Middleware Keamanan (Signature, Nonce, & JWT) yang terintegrasi dengan Redis.

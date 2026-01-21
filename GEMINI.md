@@ -35,7 +35,7 @@ Dokumen ini adalah panduan konteks bagi asisten AI (Gemini) untuk memahami atura
 - **Abuse Prevention:** Terapkan `express-rate-limit` pada semua endpoint API.
 - **Logging:** Gunakan sistem logging untuk setiap error dan aktivitas krusial guna keperluan debugging.
 - **Nonce Validation:** Gunakan `nonce` (number used once) yang dikombinasikan dengan timestamp pada setiap request sensitif untuk mencegah Replay Attacks.
-- **Signature Validation:** Gunakan `signature` (hash dari request body + timestamp + nonce + secret key dari masing-masing device) pada setiap request sensitif untuk mencegah Replay Attacks.
+- **Signature Validation:** Gunakan `signature` (hash dari request body + timestamp + nonce + secret key dari masing-masing device) pada setiap request sensitif untuk mencegah Replay Attacks. Secret key di server harus diambil dari database berdasarkan `deviceId`.
 - **Password Hashing:** Gunakan bcrypt untuk hashing password.
 - Aturan Validasi Tambahan:
     - Sebelum melakukan hashing, `rawBody` harus dipastikan konsisten. Disarankan menggunakan string concatenation dari field utama atau melakukan `JSON.stringify` dengan urutan key yang terurut (alphabetical) untuk menghindari ketidakcocokan signature antara Android (Java/Kotlin) dan Server (Node.js).
@@ -300,6 +300,16 @@ Untuk efisiensi pengiriman data hasil scan dalam jumlah besar dari Android, guna
     ...
   ]
 }
+---
+## 🧪 Standar Testing
+- **Framework:** Gunakan `Jest` sebagai test runner dan `Supertest` untuk integration testing API.
+- **Requirement:** Setiap pembuatan service API baru WAJIB disertai dengan file unit test atau integration test di direktori `tests`.
+- **Cakupan Testing:**
+    - **Success Case:** Memastikan response 200/201 dengan struktur JSON yang benar.
+    - **Validation Case:** Memastikan input yang salah ditolak (400 Bad Request).
+    - **Security Case:** Memastikan request tanpa signature/token ditolak (401/403).
+    - **DbContract Check:** Memastikan query database tidak menggunakan string literal.
+- **Mocking:** Gunakan mocking untuk library pihak ketiga seperti Redis atau database jika diperlukan untuk unit testing murni.
 ---
 ## Instruksi Khusus untuk AI
 1. Jika saya meminta fitur baru, selalu prioritaskan aspek **keamanan** dan **integritas data**.

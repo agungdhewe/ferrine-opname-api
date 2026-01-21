@@ -4,7 +4,7 @@
 - **Abuse Prevention:** Terapkan `express-rate-limit` pada semua endpoint API.
 - **Logging:** Gunakan sistem logging untuk setiap error dan aktivitas krusial guna keperluan debugging.
 - **Nonce Validation:** Gunakan `nonce` (number used once) yang dikombinasikan dengan timestamp pada setiap request sensitif untuk mencegah Replay Attacks.
-- **Signature Validation:** Gunakan `signature` (hash dari request body + timestamp + nonce + secret key dari masing-masing device) pada setiap request sensitif untuk mencegah Replay Attacks.
+- **Signature Validation:** Gunakan `signature` (hash dari request body + timestamp + nonce + secret key dari masing-masing device) pada setiap request sensitif untuk mencegah Replay Attacks. Secret key di server harus diambil dari database berdasarkan `deviceId`.
 - **Password Hashing:** Gunakan bcrypt untuk hashing password.
 - Aturan Validasi Tambahan:
     - Sebelum melakukan hashing, `rawBody` harus dipastikan konsisten. Disarankan menggunakan string concatenation dari field utama atau melakukan `JSON.stringify` dengan urutan key yang terurut (alphabetical) untuk menghindari ketidakcocokan signature antara Android (Java/Kotlin) dan Server (Node.js).

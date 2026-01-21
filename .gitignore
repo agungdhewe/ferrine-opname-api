@@ -1,0 +1,32 @@
+# Dependencies
+node_modules/
+dist/
+.npm/
+
+# Environment Variables
+.env
+.env.test
+.env.production
+.env.local
+
+# IDEs and Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Testing
+coverage/
+.jest/
+
+# OS Files
+Thumbs.db
+Desktop.ini
